@@ -97,3 +97,27 @@ exports.allFlats = (req, res) => {
         res.json(result)
     })
 }
+
+exports.bookedFlats = (req, res) => {
+    let sql = "SELECT * FROM flats_details Where isbooked = 1"
+    con.query(sql , (err , result)=>{
+        if(err){
+            return res.status(400).json({
+                error: err
+            })
+        }
+        res.json(result)
+    })
+}
+
+exports.unbookedFlats = (req, res) => {
+    let sql = "SELECT * FROM flats_details Where isbooked = 0"
+    con.query(sql , (err , result)=>{
+        if(err){
+            return res.status(400).json({
+                error: err
+            })
+        }
+        res.json(result)
+    })
+}

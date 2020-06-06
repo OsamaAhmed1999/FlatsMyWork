@@ -58,9 +58,9 @@ class QueryCustDetails extends Component
         <MDBCardHeader className="view view-cascade gradient-card-header blue-gradient d-flex justify-content-between align-items-center py-2 mx-4 mb-3">
 
           <div>
-            <MDBBtn onine rounded size="sm" color="white" className="px-2">
+            {/* <MDBBtn onine rounded size="sm" color="white" className="px-2">
               <a href="#win" className="fa fa-th-large mt-0"></a>
-            </MDBBtn>
+            </MDBBtn> */}
 
             <MDBBtn outline rounded size="sm" color="white" className="px-2">
             <i className="fa fa-columns mt-0"></i>

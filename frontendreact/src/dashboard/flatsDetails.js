@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import axios from 'axios';
-import { MDBCard, MDBCardBody, MDBCardHeader, MDBBtn, MDBTable ,MDBDataTable, MDBTableHead, MDBTableBody} from 'mdbreact';
+import { MDBCard, MDBCardBody, MDBCardHeader, MDBBtn, MDBTable ,MDBDataTable, MDBDropdown, MDBDropdownToggle, MDBDropdownItem, MDBDropdownMenu } from 'mdbreact';
+var booked, all, unbooked
 
 class flatsDetails extends Component
 {
@@ -22,6 +23,11 @@ class flatsDetails extends Component
         {
           'label': 'Floor',
           'field': 'floor',
+          'sort': 'asc'
+        },
+        {
+          'label': 'Booked',
+          'field': 'isbooked',
           'sort': 'asc'
         },
         {
@@ -53,13 +59,37 @@ class flatsDetails extends Component
     }
   }
 
+
   componentDidMount(){
     axios.get(`http://localhost:8080/allfd`)
-      .then(response => {
-        this.setState({rows: response.data});
-        console.log(response.data)
-      })
+    .then(response => {
+      this.setState({rows: response.data});
+      all = response.data
+    })
+    
+    axios.get(`http://localhost:8080/booked`)
+    .then(response => {
+      booked = response.data
+    })
+
+    axios.get(`http://localhost:8080/unbooked`)
+    .then(response => {
+      unbooked = response.data
+    })
   }
+
+  handleChange = (Name) => (event) => {
+    if(Name == "Booked")
+    {
+      this.setState({rows: booked})
+    }
+    else if(Name == "unBooked"){
+      this.setState({rows: unbooked})
+    }
+    else if(Name == "All"){
+      this.setState({rows: all})
+    }
+  };
 
   
   render(){
@@ -67,9 +97,9 @@ class flatsDetails extends Component
       <MDBCard className="styletables" >
         <MDBCardHeader className="view view-cascade gradient-card-header blue-gradient d-flex justify-content-between align-items-center py-2 mx-4 mb-3">
 
-            <MDBBtn rounded size="sm" color="white" className="px-2">
+            {/* <MDBBtn rounded size="sm" color="white" className="px-2">
               <a href="#win" className="fa fa-th-large mt-0"></a>
-            </MDBBtn>
+            </MDBBtn> */}
 
             <MDBBtn outline rounded size="sm" color="white" className="px-2">
               <i className="fa fa-columns mt-0"></i>
@@ -94,6 +124,19 @@ class flatsDetails extends Component
             </MDBBtn>
 
         </MDBCardHeader>
+          
+        <MDBDropdown>
+          <MDBDropdownToggle caret color="primary">
+            Select
+          </MDBDropdownToggle>
+          <MDBDropdownMenu basic>
+            <MDBDropdownItem onClick = {this.handleChange("Booked")}> Booked Flats</MDBDropdownItem>
+            <MDBDropdownItem onClick = {this.handleChange("unBooked")}> Unbooked Flats</MDBDropdownItem>
+            <MDBDropdownItem onClick = {this.handleChange("All")}> All Flats </MDBDropdownItem>
+            {/* <MDBDropdownItem divider /> */}
+          </MDBDropdownMenu>
+        </MDBDropdown>
+        
 
         <MDBCardBody cascade>
           

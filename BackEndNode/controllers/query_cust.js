@@ -24,13 +24,19 @@ exports.postquerycust = (req , res)=>{
     email:req.body.email 
   } ;
 
+  console.log("haha")
   let sql = "INSERT INTO query_cust SET ?"; 
   con.query(sql, data ,(err , result)=>{
-    if(err)throw err;
-    console.log(result);
-    res.status(400).json({
-      post:data
-    })
+    if(err){
+      return res.status(400).json({
+          error: err.sqlMessage
+      });
+    }
+    else{
+      res.status(200).json({
+          message: "Inserted Successfuly"
+      });
+    }
   })
 }
 
