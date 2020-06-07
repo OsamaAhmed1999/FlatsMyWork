@@ -1,5 +1,5 @@
 import React , {Component } from 'react'
-import { MDBInput ,MDBCard ,MDBCardHeader, MDBBtn } from 'mdbreact'
+import { MDBInput ,MDBCard ,MDBCardHeader, MDBBtn, MDBDataTable } from 'mdbreact'
 import axios from 'axios';
 
 class home extends Component {
@@ -11,104 +11,100 @@ class home extends Component {
       mob_no: 0,
       email: "",
       error: "",
-      open: false
+      open: false,
+
+      data : {
+        columns:[
+          {
+            'label': 'Account Head',
+            'field': 'account',
+            'sort': 'asc'
+          },
+          {
+            'label': 'Due Amount',
+            'field': 'amount',
+            'sort': 'asc'
+          },
+          {
+            'label': 'Due Date',
+            'field': 'Duedate',
+            'sort': 'asc'
+          },
+          {
+            'label': 'Amount Paid',
+            'field': 'paidAmount',
+            'sort': 'asc'
+          },
+          {
+            'label': 'Paid On',
+            'field': 'PaidDate',
+            'sort': 'asc'
+          },
+          {
+            'label': 'Surcharge',
+            'field': 'surcharge',
+            'sort': 'asc'
+          },
+
+        ],
+        rows : [
+          {
+            // 'check': <MDBInput label="" type="checkbox" id="checkbox6" />,
+             'account': 'Installment 01',
+             'amount': '400,000',
+             'Duedate': ' 9 april 2020',
+             'paidAmount': '400,000',
+             'PaidDate': '9 april 2020',
+             'surcharge': '-'
+           },
+           {
+            // 'check': <MDBInput label="" type="checkbox" id="checkbox6" />,
+             'account': 'Installment 05',
+             'amount': '400,000',
+             'Duedate': ' 4 april 2020',
+             'paidAmount': '400,000',
+             'PaidDate': '9 april 2020',
+             'surcharge': '-'
+           },
+           {
+            // 'check': <MDBInput label="" type="checkbox" id="checkbox6" />,
+             'account': 'Installment 01',
+             'amount': '400,000',
+             'Duedate': ' 9 april 2020',
+             'paidAmount': '400,000',
+             'PaidDate': '9 april 2020',
+             'surcharge': '-'
+           },
+           {
+            // 'check': <MDBInput label="" type="checkbox" id="checkbox6" />,
+             'account': 'Installment 05',
+             'amount': '400,000',
+             'Duedate': ' 4 april 2020',
+             'paidAmount': '400,000',
+             'PaidDate': '9 april 2020',
+             'surcharge': '-'
+           },
+           {
+            // 'check': <MDBInput label="" type="checkbox" id="checkbox6" />,
+             'account': 'Installment 01',
+             'amount': '400,000',
+             'Duedate': ' 9 april 2020',
+             'paidAmount': '400,000',
+             'PaidDate': '9 april 2020',
+             'surcharge': '-'
+           },
+           {
+            // 'check': <MDBInput label="" type="checkbox" id="checkbox6" />,
+             'account': 'Installment 05',
+             'amount': '400,000',
+             'Duedate': ' 4 april 2020',
+             'paidAmount': '400,000',
+             'PaidDate': '9 april 2020',
+             'surcharge': '-'
+           },
+        ]
+      }
     }
-    
-    // this.state = {
-
-    //   data : {
-    //     columns:[
-    //       {
-    //         'label': 'Account Head',
-    //         'field': 'account',
-    //         'sort': 'asc'
-    //       },
-    //       {
-    //         'label': 'Due Amount',
-    //         'field': 'amount',
-    //         'sort': 'asc'
-    //       },
-    //       {
-    //         'label': 'Due Date',
-    //         'field': 'Duedate',
-    //         'sort': 'asc'
-    //       },
-    //       {
-    //         'label': 'Amount Paid',
-    //         'field': 'paidAmount',
-    //         'sort': 'asc'
-    //       },
-    //       {
-    //         'label': 'Paid On',
-    //         'field': 'PaidDate',
-    //         'sort': 'asc'
-    //       },
-    //       {
-    //         'label': 'Surcharge',
-    //         'field': 'surcharge',
-    //         'sort': 'asc'
-    //       },
-
-    //     ],
-    //     rows : [
-    //       {
-    //         // 'check': <MDBInput label="" type="checkbox" id="checkbox6" />,
-    //          'account': 'Installment 01',
-    //          'amount': '400,000',
-    //          'Duedate': ' 9 april 2020',
-    //          'paidAmount': '400,000',
-    //          'PaidDate': '9 april 2020',
-    //          'surcharge': '-'
-    //        },
-    //        {
-    //         // 'check': <MDBInput label="" type="checkbox" id="checkbox6" />,
-    //          'account': 'Installment 05',
-    //          'amount': '400,000',
-    //          'Duedate': ' 4 april 2020',
-    //          'paidAmount': '400,000',
-    //          'PaidDate': '9 april 2020',
-    //          'surcharge': '-'
-    //        },
-    //        {
-    //         // 'check': <MDBInput label="" type="checkbox" id="checkbox6" />,
-    //          'account': 'Installment 01',
-    //          'amount': '400,000',
-    //          'Duedate': ' 9 april 2020',
-    //          'paidAmount': '400,000',
-    //          'PaidDate': '9 april 2020',
-    //          'surcharge': '-'
-    //        },
-    //        {
-    //         // 'check': <MDBInput label="" type="checkbox" id="checkbox6" />,
-    //          'account': 'Installment 05',
-    //          'amount': '400,000',
-    //          'Duedate': ' 4 april 2020',
-    //          'paidAmount': '400,000',
-    //          'PaidDate': '9 april 2020',
-    //          'surcharge': '-'
-    //        },
-    //        {
-    //         // 'check': <MDBInput label="" type="checkbox" id="checkbox6" />,
-    //          'account': 'Installment 01',
-    //          'amount': '400,000',
-    //          'Duedate': ' 9 april 2020',
-    //          'paidAmount': '400,000',
-    //          'PaidDate': '9 april 2020',
-    //          'surcharge': '-'
-    //        },
-    //        {
-    //         // 'check': <MDBInput label="" type="checkbox" id="checkbox6" />,
-    //          'account': 'Installment 05',
-    //          'amount': '400,000',
-    //          'Duedate': ' 4 april 2020',
-    //          'paidAmount': '400,000',
-    //          'PaidDate': '9 april 2020',
-    //          'surcharge': '-'
-    //        },
-
-    //     ]
-    //   }
-    // }
   }
 
   handleChange = (Name) => (event) => {
@@ -210,7 +206,7 @@ class home extends Component {
         </div>
 
 
-        {/* for Installmets Table in home
+        for Installmets Table in home
         <div className="installments">
         <MDBCardHeader className="view view-cascade gradient-card-header blue-gradient d-flex justify-content-between align-items-center py-2 mx-4 mb-3  ">
 
@@ -234,7 +230,7 @@ class home extends Component {
           data={this.state.data}/>
 
 
-        </div> */}
+        </div>
       </MDBCard>
 
 

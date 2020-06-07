@@ -147,9 +147,9 @@ class flatsDetails extends Component
 
         </MDBCardHeader>
           
-        <MDBDropdown>
-          <MDBDropdownToggle caret color="primary">
-            Select
+        <MDBDropdown className="d-flex justify-content-center">
+          <MDBDropdownToggle  caret color="primary" >
+            Select Flat Mode
           </MDBDropdownToggle>
           <MDBDropdownMenu basic>
             <MDBDropdownItem onClick = {this.handleChange("Booked")}> Booked Flats</MDBDropdownItem>
