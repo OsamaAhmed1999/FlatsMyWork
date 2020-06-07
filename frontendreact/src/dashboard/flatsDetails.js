@@ -96,14 +96,14 @@ class flatsDetails extends Component
   }
 
   handleChange = (Name) => (event) => {
-    if(Name == "Booked")
+    if(Name === "Booked")
     {
       this.setState({rows: booked})
     }
-    else if(Name == "unBooked"){
+    else if(Name === "unBooked"){
       this.setState({rows: unbooked})
     }
-    else if(Name == "All"){
+    else if(Name === "All"){
       this.setState({rows: all})
     }
   };
@@ -159,34 +159,6 @@ class flatsDetails extends Component
           </MDBDropdownMenu>
         </MDBDropdown>
         
-
-        <div className = "checkBoxFlatForm">
-      {/* Default inline 1 */}
-      <div class="custom-control custom-checkbox custom-control-inline">
-        <input 
-        type="checkbox" 
-        class="custom-control-input" 
-        id="defaultInline1" 
-        // onChange = {this._handleInputChange}  
-        //  checked={this.state.radio }
-         />
-         
-
-        <label class="custom-control-label" for="defaultInline1">BOOKED</label>
-      </div>
-
-      {/* Default inline 2 */}
-      <div class="custom-control custom-checkbox custom-control-inline">
-        <input type="checkbox" class="custom-control-input" id="defaultInline2" onClick = {this.onClick = 2} checked={this.state.radio === 2 ? true : false}/>
-        <label class="custom-control-label" for="defaultInline2">UNBOOKED</label>
-      </div>
-
-     {/* Default inline 3 */}
-      <div class="custom-control custom-checkbox custom-control-inline">
-        <input type="checkbox" class="custom-control-input" id="defaultInline3" onClick = {this.onClick = 3} checked={this.state.radio === 3 ? true : false} />
-        <label class="custom-control-label" for="defaultInline3">ALL</label>
-      </div>
-    </div>
 
 
         <MDBCardBody cascade>

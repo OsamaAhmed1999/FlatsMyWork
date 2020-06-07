@@ -66,7 +66,6 @@ class Flats_form extends Component {
           iscorner: false,
           iswestopen: false,
           isroadfacing: false,  
-          price: "",
           error: "",
           open: true
         })
