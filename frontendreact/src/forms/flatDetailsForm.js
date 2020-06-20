@@ -13,7 +13,6 @@ class Flats_form extends Component {
       floor: null,
       covered_area: null,
       price: null,
-      isbooked: false,
       iscorner: false,
       iswestopen: false,
       isroadfacing: false,
@@ -38,13 +37,12 @@ class Flats_form extends Component {
 
   clickSave = event => {
     event.preventDefault()
-    const {flat_num, type, floor, covered_area, isbooked, iscorner, iswestopen, isroadfacing , price} = this.state
+    const {flat_num, type, floor, covered_area, iscorner, iswestopen, isroadfacing , price} = this.state
     const flat_detail = {
       flat_num,
       type,
       floor,
       covered_area,
-      isbooked,
       iscorner,
       iswestopen,
       isroadfacing,
@@ -61,8 +59,7 @@ class Flats_form extends Component {
           type: "",
           floor: "",
           covered_area: "",
-          price: null,
-          isbooked: false,
+          price: "",
           iscorner: false,
           iswestopen: false,
           isroadfacing: false,  
@@ -158,14 +155,14 @@ class Flats_form extends Component {
 
                     <div className="d-flex justify-content-around">
                       
-                      <div>
+                      {/* <div>
                         <div className="form-check styleFlatFormcheckboxes">
                           <input type="checkbox" className="form-check-input" id="BookedFlat"
                             onChange={this.handleCheckbox("isbooked")}
                             />
                           <label className="form-check-label" for="BookedFlat">Park Facing</label>
                         </div>
-                      </div>
+                      </div> */}
 
                       <div>
                         <input type="checkbox" className="form-check-input" id="CornerFlat"

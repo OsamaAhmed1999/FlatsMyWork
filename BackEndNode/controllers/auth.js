@@ -59,6 +59,7 @@ exports.signup = async (req, res) =>{
 exports.signin = (req, res) => {
     // Find the user based on email
     const { email, password } = req.body
+    console.log("Body", req.body)
     sql = `SELECT * FROM users WHERE email = ?`;
     con.query(sql, [email], (err, result)=> {
         // if error or no user
@@ -67,8 +68,8 @@ exports.signin = (req, res) => {
                 error: "User with that Email does not exist. please signup"
             })
         }
-
-        name = result[0].name
+        console.log("result", result )
+        // name = result[0].name
         user_id = result[0].user_id
         
         // if user, authenticate
@@ -83,7 +84,8 @@ exports.signin = (req, res) => {
         // persists the token in cookie
         res.cookie("t", token, {expire:new Date()+9999})
         // return response with user and token to frontend client
-        return res.json({token, user: {name, user_id, email}})
+        // return res.json({token, user: {name, user_id, email}})
+        return res.json({token})
     })
     
 }

@@ -42,7 +42,7 @@ class Sidebar extends Component {
                 </MDBListGroupItem>
             </NavLink>
 
-            <NavLink to="/maps" activeClassName="activeClass">
+            <NavLink to="/allinsta" activeClassName="activeClass">
                 <MDBListGroupItem>
                     <MDBIcon icon="dollar-sign" className="mr-3"/>
                     Installments

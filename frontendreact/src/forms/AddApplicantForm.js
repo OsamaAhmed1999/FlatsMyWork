@@ -3,7 +3,7 @@ import axios from 'axios';
 import { MDBContainer, MDBRow, MDBCol, MDBInput ,MDBCard, MDBCardHeader , MDBBtn } from 'mdbreact'
 var AllFlats = ['A-101','B-203','C-504','D-150','E-504'] ;
 var fdata
-
+var selectedflat
 
 class AddApplicant extends Component{
   
@@ -14,7 +14,7 @@ class AddApplicant extends Component{
       appli_name: "",
       appli_father_name: "",
       appli_DOB: "",
-      appli_CNIC: 0,
+      appli_CNIC: "",
       appli_postal_add: "",
       appli_address: "",
       appli_nationality: "",
@@ -27,7 +27,6 @@ class AddApplicant extends Component{
       open: false,
       allFlatsData: [],
       SelectedFlat :"",
-      //unbookedflats.flatno
     }
 
     this.flatdata().then(data => {
@@ -39,8 +38,6 @@ class AddApplicant extends Component{
         for (i = 0; i < data.length; i++) {
           AllFlats[i]=  data[i].flat_num
         }
-
-      //  this.setState({AllFlats: fdata})
       }
     })
   }
@@ -106,6 +103,8 @@ class AddApplicant extends Component{
         })
       }
     })
+
+    this.bookedOn()
   }
 
   savefd = applicant => {
@@ -118,37 +117,67 @@ class AddApplicant extends Component{
     })
   };
 
+  bookedOn(){
+    return axios.put(`http://localhost:8080/updatefd/${selectedflat.flat_num}`)
+    .then(response => {
+      return response.data
+    })
+    .catch(err => {
+      return err.response.data
+    })
+  }
+
   //for dropdown selection flat
 
   SetFlatDisableAttributes = event =>{
-    // console.log("flat det array", flatdet[0]) 
     var i
     for(i=0 ; i < AllFlats.length ; i++)
     {
+      if(event.target.value === this.state.allFlatsData[i].flat_num ){
 
+        selectedflat = this.state.allFlatsData[i]
 
-    if(event.target.value === this.state.allFlatsData[i].flat_num ){
+        if(this.state.allFlatsData[i].isroadfacing === 0)
+        {
+          this.state.allFlatsData[i].isroadfacing = "No"
+        }else{
+          this.state.allFlatsData[i].isroadfacing = "Yes"
+        }
+        if(this.state.allFlatsData[i].iswestopen === 0)
+        {
+          this.state.allFlatsData[i].iswestopen = "No"
+        }else{
+          this.state.allFlatsData[i].iswestopen = "Yes"
+        }
+        if(this.state.allFlatsData[i].iscorner === 0)
+        {
+          this.state.allFlatsData[i].iscorner = "No"
+        }else{
+          this.state.allFlatsData[i].iscorner = "Yes"
+        }
+        if(this.state.allFlatsData[i].price === null)
+        {
+          this.state.allFlatsData[i].price = "Not Available"
+        }
 
-      this.setState({
-        SelectedFlat : event.target.value, //compare target value with data.flatno 
-        flatType: this.state.allFlatsData[i].type,
-        flatPrice: this.state.allFlatsData[i].price,
-        floor: this.state.allFlatsData[i].floor,
-        RoadFacing: this.state.allFlatsData[i].isroadfacing,
-        ParkFacing: 0,
-        SqArea: this.state.allFlatsData[i].covered_area,
-        WestOpen: this.state.allFlatsData[i].iswestopen,
-        Corner : this.state.allFlatsData[i].iscorner,
-      })
-
-    }
+        this.setState({
+          SelectedFlat : event.target.value, //compare target value with data.flatno 
+          flatType: this.state.allFlatsData[i].type,
+          flatPrice: this.state.allFlatsData[i].price,
+          floor: this.state.allFlatsData[i].floor,
+          RoadFacing: this.state.allFlatsData[i].isroadfacing,
+          ParkFacing: null,
+          SqArea: this.state.allFlatsData[i].covered_area,
+          WestOpen: this.state.allFlatsData[i].iswestopen,
+          Corner : this.state.allFlatsData[i].iscorner,
+        })
+      }
   }
 }
   
 
   render()
   {
-
     const {appli_name, appli_father_name, appli_DOB, appli_CNIC,
       appli_postal_add, appli_address, appli_nationality, appli_occupation,
       kin_name, kin_relation, kin_CNIC, kin_address, error, open} = this.state

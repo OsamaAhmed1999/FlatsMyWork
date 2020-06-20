@@ -29,7 +29,7 @@ exports.postFlatDetails = (req , res) => {
         floor: req.body.floor,
         covered_area: req.body.covered_area,
         price: null,
-        isbooked: req.body.isbooked,
+        isbooked: 0,
         iscorner: req.body.iscorner,
         iswestopen: req.body.iswestopen,
         isroadfacing: req.body.isroadfacing
@@ -121,3 +121,18 @@ exports.unbookedFlats = (req, res) => {
         res.json(result)
     })
 }
+
+exports.updateFlatDetails = (req, res) => {
+    console.log("dadaa",req.data)
+    let sql = `UPDATE flats_details SET isbooked = 1 WHERE flat_num = '${req.data.flat_num}'`
+    con.query(sql , (err , result)=>{
+        if(err){
+            return res.status(400).json({
+                error: err
+            })
+        }
+        res.json(result)
+        console.log("result", result)
+    })
+}
+

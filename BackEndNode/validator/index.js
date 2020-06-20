@@ -46,6 +46,8 @@ exports.installmentValidator = (req, res, next) => {
 
     req.check("inst_amount", "Amount is required").notEmpty();
     req.check("inst_flatno", "Flat Number is required").notEmpty();
+    req.check("inst_date", "Date is required").notEmpty();
+    req.check("inst_name", "Payee name is required").notEmpty();
     req.check("inst_CNIC", "CNIC is required").notEmpty();
     req.check("inst_CNIC")
     .matches(/\d/)
@@ -142,13 +144,14 @@ exports.postQuerycustValidator = (req, res  ,next)=>{
         max: 11
     })
     .withMessage("Mobile number must contain 11 digits")
-    // req.check("email", "Email must be 3 to 32 characters")
-    // .matches(/.+\@.+\..+/)
-    // .withMessage("Email must contain @ ex: abc@mail.com")
-    // .isLength({
-    //     min: 6,
-    //     max: 32
-    // })
+
+    req.check("email", "Email must be 3 to 32 characters").optional()
+    .matches(/.+\@.+\..+/)
+    .withMessage("Email must contain @ ex: abc@mail.com")
+    .isLength({
+        min: 6,
+        max: 32
+    })
 
     const errors = req.validationErrors();
     if(errors){

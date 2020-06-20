@@ -1,18 +1,14 @@
 import React , {Component } from 'react'
-import { MDBInput ,MDBCard ,MDBCardHeader, MDBBtn, MDBDataTable } from 'mdbreact'
-import axios from 'axios';
+import { MDBDataTable, MDBInput ,MDBCard ,MDBCardHeader, MDBBtn } from 'mdbreact'
 
-class home extends Component {
-  constructor(){
+
+class installmentsTable extends Component 
+{
+  constructor()
+  {
     super()
 
     this.state ={
-      name: "",
-      mob_no: 0,
-      email: "",
-      error: "",
-      open: false,
-
       data : {
         columns:[
           {
@@ -102,127 +98,52 @@ class home extends Component {
              'PaidDate': '9 april 2020',
              'surcharge': '-'
            },
+
         ]
       }
-    }
-  }
+      }
 
-  handleChange = (Name) => (event) => {
-    this.setState({error: ""})
-    this.setState({[Name]: event.target.value});
-  };
-
-  clickSave = event => {
-    event.preventDefault()
-    const {name, mob_no, email} = this.state
-    
-    const query = {
-      name,
-      mob_no,
-      email
     }
 
-    this.savefd(query).then(data => {
-      if(data.error){
-        this.setState({error: data.error, open: false})
-        console.log("data",data.error)
-      }
-      else{
-        this.setState({
-          name: "",
-          mob_no: 0,
-          email: "",
-          error: "",
-          open: true
-        })
-      }
-    })
-  };
+    render()
+    {
 
-  savefd = query => {
-    return axios.post(`http://localhost:8080/postquerycust`,  query )
-    .then(response => {
-      return response.data
-    })
-    .catch(err => {
-      return err.response.data
-    })
-  };
+      return(
 
-  render()
-  {
-    const {name, mob_no, email, error, open} = this.state
-    return(
-      
-      <MDBCard className = "styletables">
+        <MDBCard className="styletables" >     
 
-        {/* for query cust form in home */}
-        <div className="querycust">
-          <MDBCardHeader className="view view-cascade gradient-card-header blue-gradient d-flex justify-content-between align-items-center py-2 mx-4 mb-3  ">
-
-          <div className="alert alert-danger" style={{display: error ? "" : "none"}}> 
-            {error}
-          </div>
-          
-          <div className="alert alert-info" style={{display: open ? "" : "none"}}>
-            Inserted Successfully
-          </div>
-
-          <h4><b>QUERY CUSTOMER</b></h4>
-          {/* <MDBBtn outline rounded size="sm" color="white" className="px-2">
-            <a href="/getquerycust"className="fas fa-eye mt-0"></a>
-          </MDBBtn> */}
-
-        </MDBCardHeader>
-
-        <form>
-          <MDBInput label="Name "
-            group type="text" 
-            validate error="wrong"
-            success="right"
-            onChange={this.handleChange("name")}
-            value={name} />
-
-          <MDBInput label="Mobile# "
-            group type="text" 
-            validate error="wrong"
-            success="right" 
-            onChange={this.handleChange("mob_no")}
-            value={mob_no}/>
-
-          <MDBInput label="Email "  
-            group type="email" 
-            validate error="wrong"
-            success="right" 
-            onChange={this.handleChange("email")}
-            value={email}/>
-
-            <div className="text-center ml-5">
-              <MDBBtn onClick={this.clickSave} href="/allfd" >Save</MDBBtn>
-            </div>
-
-
-        </form>
-        </div>
-
-
-        for Installmets Table in home
-        <div className="installments">
         <MDBCardHeader className="view view-cascade gradient-card-header blue-gradient d-flex justify-content-between align-items-center py-2 mx-4 mb-3  ">
 
-        <h4><b>INSTALLMETS</b></h4>
-        <MDBBtn outline rounded size="sm" color="white" className="px-2">
-            <a href="/maps"className="fas fa-eye mt-0"> Preview</a>
-          </MDBBtn>
-        <MDBBtn outline rounded size="sm" color="white" className="px-2">
-            <a href="/postinsta"className="fas fa-plus mt-0">ADD</a>
+        <div>
+          <MDBBtn onine rounded size="sm" color="white" className="px-2">
+            <a href="#win" className="fa fa-th-large mt-0"></a>
           </MDBBtn>
 
-        </MDBCardHeader>
+          <MDBBtn outline rounded size="sm" color="white" className="px-2">
+          <i className="fa fa-columns mt-0"></i>
+          </MDBBtn>
+
+        </div>
+        <h4><b>INSTALLMETS</b></h4>
+
+        <div>
+        <MDBBtn outline rounded size="sm" color="white" className="px-2">
+          <i className="fas fa-pencil-alt mt-0"></i>
+        </MDBBtn>
+        <MDBBtn outline rounded size="sm" color="white" className="px-2" onClick={this.print}>
+          <a href="#printpreview" className="fas fa-print mt-0"> Print</a>
+          
+
+        </MDBBtn>
+        <MDBBtn outline rounded size="sm" color="white" className="px-2">
+          <a href="/postinsta"className="fas fa-plus mt-0"> ADD</a>
+        </MDBBtn>
+        </div>
+
+</MDBCardHeader>
+        
 
         <MDBDataTable  
-          scrollY 
-          maxHeight="200px"
           bordered
           small 
           striped 
@@ -230,14 +151,12 @@ class home extends Component {
           data={this.state.data}/>
 
 
-        </div>
+        
       </MDBCard>
 
-
-
-      
-    )
-  }
+      )
+    }
+  
 }
 
-export default home;
+export default installmentsTable;
